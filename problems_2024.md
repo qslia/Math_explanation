@@ -1272,19 +1272,19 @@ This is **not a trick** — it is exactly the same operation written in matrix f
 ## 3️⃣ Apply this to your case
 
 Let
-[
+$$
 w = Qv.
-]
+$$
 
-Then (w) is just a vector, so by the rule above:
-[
+Then $w$ is just a vector, so by the rule above:
+$$
 w\cdot w = w^Tw.
-]
+$$
 
 Substitute back:
-[
+$$
 (Qv)\cdot(Qv) = (Qv)^T(Qv).
-]
+$$
 
 That’s it.
 
@@ -1292,16 +1292,16 @@ That’s it.
 
 ## 4️⃣ Why mathematicians do this (important intuition)
 
-Writing dot products as (v^Tv) lets us:
+Writing dot products as $v^Tv$ lets us:
 
 * combine dot products with matrices
 * use transpose rules
 * prove properties like length preservation cleanly
 
 For example:
-[
+$$
 (Qv)^T(Qv) = v^TQ^TQv
-]
+$$
 
 This step would be **impossible** without the transpose form.
 
@@ -1312,13 +1312,255 @@ This step would be **impossible** without the transpose form.
 > **Dot product = transpose × column product**
 
 or
-[
+$$
 \boxed{a\cdot b = a^Tb}
-]
+$$
 
 Everything else follows from this identity.
 
-If you want, next I can explain **why transpose behaves the way it does** (e.g. why ((AB)^T=B^TA^T)), which is the next logical step.
+If you want, next I can explain **why transpose behaves the way it does** (e.g. why $(AB)^T=B^TA^T)$, which is the next logical step.
+
+---
+
+Good question — and **no**, it does **not** mean “from 1 to infinity”.
+Let’s be very precise.
+
+---
+
+## Short answer
+
+**$k$ does *not* go to infinity.**
+It runs over a **finite range**, determined by the **matrix sizes**.
+
+---
+
+## What $k$ really means in
+
+$$
+(AB)*{ij}=\sum_k A*{ik}B_{kj}
+$$
+
+Suppose:
+
+* $A$ is an $m\times n$ matrix
+* $B$ is an $n\times p$ matrix
+
+Then:
+
+$$
+\boxed{k = 1,2,\dots,n}
+$$
+
+That’s it — **finite**, not infinite.
+
+---
+
+## Why exactly $1$ to $n$?
+
+Because:
+
+* row $i$ of $A$ has **$n$ entries**
+* column $j$ of $B$ has **$n$ entries**
+* each pair must be multiplied and added
+
+So you need **one term for each matching position**.
+
+---
+
+## Concrete example
+
+Let
+$$
+A=
+\begin{pmatrix}
+a_{11} & a_{12} & a_{13}
+\end{pmatrix}
+\quad (1\times 3),
+\qquad
+B=
+\begin{pmatrix}
+b_{11}\\
+b_{21}\\
+b_{31}
+\end{pmatrix}
+\quad (3\times 1)
+$$
+
+Then:
+$$
+(AB)_{11}
+=
+
+a_{11}b_{11}
++
+a_{12}b_{21}
++
+a_{13}b_{31}
+$$
+
+Here:
+$$
+k=1,2,3
+$$
+
+No infinity anywhere.
+
+---
+
+## Why people don’t write the limits
+
+In linear algebra, it’s **standard shorthand**:
+
+$$
+\sum_k
+\quad \text{means} \quad
+\sum_{k=1}^{\text{(number of columns of (A))}}
+$$
+
+The limits are understood from context.
+
+---
+
+## Important contrast (very helpful)
+
+| Context                 | Meaning of (\sum) |
+| ----------------------- | ----------------- |
+| Matrix multiplication   | **Finite sum**    |
+| Power series / calculus | Often infinite    |
+
+So your confusion makes perfect sense — but **this is the finite case**.
+
+---
+
+## One-sentence takeaway 🧠
+
+> In matrix multiplication, **$\sum_k$ always means a finite sum**, determined by the matrix dimensions — **never infinite**.
+
+If you want, I can also explain **why matrix multiplication is undefined when the sizes don’t match**, which uses the same idea.
+
+---
+
+Great — you’re pointing to **this exact formula**:
+
+$$
+(AB)*{ij}=\sum*{k} A_{ik},B_{kj}
+$$
+
+and asking **“what is it?”**
+Let’s explain it **from the ground up**, very concretely.
+
+---
+
+## 1️⃣ What does $(AB)_{ij}$ mean?
+
+* $AB$ is a **matrix**
+* $(AB)_{ij}$ means:
+
+  > the entry in **row (i)** and **column (j)** of the matrix (AB)
+
+So this formula tells you **how to compute one entry** of the product matrix.
+
+---
+
+## 2️⃣ What do the subscripts mean?
+
+* $A_{ik}$: entry of matrix $A$ in **row $i$**, **column $k$**
+* $B_{kj}$: entry of matrix $B$ in **row $k$**, **column $j$**
+
+The index $k$ is a **dummy index** — it runs through all possible columns of $A$ / rows of $B$.
+
+---
+
+## 3️⃣ What does the summation (\sum_k) mean?
+
+$$
+\sum_k A_{ik} B_{kj}
+$$
+
+means:
+$$
+A_{i1}B_{1j}
+
++ A_{i2}B_{2j}
++ A_{i3}B_{3j}
++ \cdots
+$$
+
+So you:
+
+1. fix row $i$ in (A)
+2. fix column $j$ in (B)
+3. multiply matching entries
+4. add them up
+
+---
+
+## 4️⃣ Row–column rule (the key idea)
+
+This formula is just a precise way of saying:
+
+> **Row $i$ of $A$ · Column $j$ of $B$**
+
+That dot product gives $(AB)_{ij}$.
+
+---
+
+## 5️⃣ Small concrete example (2×2)
+
+Let
+$
+A=
+\begin{pmatrix}
+1 & 2\\
+3 & 4
+\end{pmatrix},
+\quad
+B=
+\begin{pmatrix}
+5 & 6\\
+7 & 8
+\end{pmatrix}
+$
+
+Compute $(AB)_{12}$ (row 1, column 2):
+
+$
+(AB)_{12}
+= A_{11}B_{12}+A_{12}B_{22}
+= 1\cdot6 + 2\cdot8
+= 22
+$
+
+That’s exactly what appears in matrix multiplication.
+
+---
+
+## 6️⃣ Why we need the index (k)
+
+The index $k$ tells us **which entries must match**:
+
+* column $k$ of $A$
+* row $k$ of $B$
+
+Without $k$, there would be no rule connecting rows of $A$ to columns of $B$.
+
+---
+
+## 7️⃣ One-sentence takeaway 🧠
+
+> $$
+> (AB)_{ij}=\sum_k A_{ik}B_{kj}
+> $$
+> means **“row $i$ of $A$ dot column $j$ of $B$”**.
+
+That’s the *definition* of matrix multiplication.
+
+If you want, I can next explain **why matrix multiplication is defined this way** (not arbitrary!) or how this connects to **linear transformations**.
+
+---
+
+
+
 
 
 
