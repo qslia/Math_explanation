@@ -3926,7 +3926,7 @@ $$
 $$
 |A|=(a+1)\begin{vmatrix}\frac{a+1}{2}&1\\1&2\end{vmatrix}
 -(a+1)\begin{vmatrix}a&1\\1&2\end{vmatrix}
-+3\begin{vmatrix}a&\\frac{a+1}{2}\\1&1\end{vmatrix}
++3\begin{vmatrix}a&\frac{a+1}{2}\\1&1\end{vmatrix}
 $$
 
 现在分别算三个 $2\times2$ 行列式。
@@ -4574,173 +4574,6 @@ If you want, I can next:
 * or connect this to **geometry (orientation)**
 
 ---
-Perfect — let’s do **concrete examples**, very slowly, with **actual swaps**, so you can *see* what “moving an entry to the top-left corner” really means.
-
-I’ll do **three examples** from a 3×3 matrix.
-
----
-
-## The setup
-
-Take a general matrix
-
-[
-A=
-\begin{pmatrix}
-a_{11} & a_{12} & a_{13}\
-a_{21} & a_{22} & a_{23}\
-a_{31} & a_{32} & a_{33}
-\end{pmatrix}
-]
-
-The **top-left corner** is position ((1,1)).
-
----
-
-## Example 1️⃣ Entry already at (1,1)
-
-Entry: (a_{11})
-
-* It is **already** in the top-left corner
-* Number of row swaps = 0
-* Number of column swaps = 0
-
-Total swaps = 0
-Sign:
-[
-(-1)^0 = +
-]
-
-So its contribution is **positive**.
-
-✅ This explains the **first “+”**.
-
----
-
-## Example 2️⃣ Entry at (1,2) — first row, second column
-
-Entry: (a_{12})
-
-### Step A: Move it to column 1
-
-Swap column 1 and column 2 **once**:
-
-[
-\begin{pmatrix}
-a_{12} & a_{11} & a_{13}\
-a_{22} & a_{21} & a_{23}\
-a_{32} & a_{31} & a_{33}
-\end{pmatrix}
-]
-
-* Row swaps: 0
-* Column swaps: 1
-
-Each swap flips the determinant sign.
-
-Total swaps = 1
-Sign:
-[
-(-1)^1 = -
-]
-
-✅ This explains the **“−”** in the middle.
-
----
-
-## Example 3️⃣ Entry at (1,3) — first row, third column
-
-Entry: (a_{13})
-
-### Step A: Move from column 3 → column 2
-
-Swap columns 2 and 3:
-
-[
-\begin{pmatrix}
-a_{11} & a_{13} & a_{12}\
-a_{21} & a_{23} & a_{22}\
-a_{31} & a_{33} & a_{32}
-\end{pmatrix}
-]
-
-### Step B: Move from column 2 → column 1
-
-Swap columns 1 and 2:
-
-[
-\begin{pmatrix}
-a_{13} & a_{11} & a_{12}\
-a_{23} & a_{21} & a_{22}\
-a_{33} & a_{31} & a_{32}
-\end{pmatrix}
-]
-
-* Row swaps: 0
-* Column swaps: 2
-
-Total swaps = 2
-Sign:
-[
-(-1)^2 = +
-]
-
-✅ This explains the **last “+”**.
-
----
-
-## 🔑 Result for the first row
-
-Putting the three examples together:
-
-| Position | Swaps | Sign |
-| -------- | ----- | ---- |
-| (1,1)    | 0     | +    |
-| (1,2)    | 1     | −    |
-| (1,3)    | 2     | +    |
-
-So expansion along the first row is:
-
-[
-+\quad -\quad +
-]
-
----
-
-## Bonus example 🔁 Entry not in first row: (2,3)
-
-Entry: (a_{23})
-
-* Move row 2 → row 1: **1 row swap**
-* Move column 3 → column 1: **2 column swaps**
-
-Total swaps:
-[
-1+2=3
-]
-
-Sign:
-[
-(-1)^3 = -
-]
-
-That’s why cofactors use:
-[
-(-1)^{i+j}
-]
-
----
-
-## One-sentence takeaway
-
-> The sign comes from **how many row + column swaps are needed to move an entry to the top-left corner**, and **each swap flips the determinant sign**.
-
-If you want, I can next:
-
-* do this **with your exact matrix**
-* show why the **remaining 2×2 determinant** is what’s left
-* or connect this to **geometry (orientation)**
----
 Great question — this gets to the **heart** of how determinants are defined.
 Short answer first, then the real explanation 👇
 
@@ -4755,9 +4588,9 @@ Now let’s unpack that properly.
 
 When we expand a determinant, we are comparing **many different entries**:
 
-* (a_{11})
-* (a_{12})
-* (a_{13})
+* $a_{11}$
+* $a_{12}$
+* $a_{13}$
 * …
 
 To compare them fairly, we must ask:
@@ -4775,7 +4608,7 @@ That reference position must be:
 
 ## 2️⃣ Why the top-left corner is the natural choice
 
-The top-left corner ((1,1)) is chosen because:
+The top-left corner $(1,1)$ is chosen because:
 
 ### ✅ It requires **zero swaps**
 
@@ -4785,7 +4618,7 @@ The top-left corner ((1,1)) is chosen because:
 
 This gives us a clean starting point.
 
-If we picked top-right ((1,n)) or bottom-left, we’d *start* with swaps already baked in — messy and unnecessary.
+If we picked top-right $(1,n)$ or bottom-left, we’d *start* with swaps already baked in — messy and unnecessary.
 
 ---
 
@@ -4813,30 +4646,30 @@ Remember the core rule:
 
 > **Each row or column swap flips the determinant’s sign**
 
-When we move an entry from ((i,j)) to ((1,1)):
+When we move an entry from $(i,j)$ to $(1,1)$:
 
-* Row swaps needed: (i-1)
-* Column swaps needed: (j-1)
+* Row swaps needed: $i-1$
+* Column swaps needed: $j-1$
 
 Total swaps:
-[
+$$
 (i-1)+(j-1)=i+j-2
-]
+$$
 
 So the sign is:
-[
+$$
 (-1)^{i+j}
-]
+$$
 
-This formula works **perfectly** because ((1,1)) is the reference.
+This formula works **perfectly** because $(1,1)$ is the reference.
 
 ---
 
 ## 5️⃣ What if we used top-right?
 
-If we used ((1,n)) as the reference:
+If we used $(1,n)$ as the reference:
 
-* The formula would involve (j) in a more complicated way
+* The formula would involve $j$ in a more complicated way
 * The nice checkerboard pattern would disappear
 * Nothing would simplify — everything would get uglier
 
@@ -4870,6 +4703,7 @@ If you want, next I can:
 * or explain determinants **purely geometrically**
 
 Just tell me 😊
+---
 
 
 
