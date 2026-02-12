@@ -117,7 +117,7 @@ $$
 $$
 因此任意长度为 $\pi$ 的区间上积分都相同：
 $$
-\int_t^{t+\pi}|\sin x|,dx=\int_0^\pi \sin x,dx=2.
+\int_t^{t+\pi}|\sin x|dx=\int_0^\pi \sin xdx=2.
 $$
 
 把区间 $[a,\ a+k\pi]$ 分成 $k$ 个长度为 $\pi$ 的小段（$k>0$ 时）：
@@ -125,7 +125,7 @@ $$
 I=\sum_{j=0}^{k-1}\int_{a+j\pi}^{a+(j+1)\pi}|\sin x|,dx
 = \sum_{j=0}^{k-1}2 = 2k.
 $$
-若 $k<0$，则积分上下限对调会带来符号，结论仍为 $I=2k$（$k=0$ 时 $I=0$）。
+若 $k<0$，则积分上下限对调会带来负号，结论仍为 $I=2k$（$k=0$ 时 $I=0$）。
 
 所以 (I) **只与 (k) 有关，与 (a) 无关**。
 
@@ -161,7 +161,7 @@ $$
 不管从哪里开始，只要区间长度是 $\pi$，积分值都一样：
 
 $$
-\int_{t}^{t+\pi}|\sin x|,dx = 2 \quad (\text{对任意 } t)
+\int_{t}^{t+\pi}|\sin x|dx = 2 \quad (\text{对任意 } t)
 $$
 
 为什么？
@@ -170,7 +170,7 @@ $$
 |\sin x|=\sin x
 $$
 $$
-\int_0^\pi \sin x,dx = 2
+\int_0^\pi \sin xdx = 2
 $$
 
 而周期性保证了 **每一个长度为 $\pi$ 的区间“面积”都等于 2**。
@@ -182,7 +182,7 @@ $$
 ## Step 3：再看你的积分区间
 
 $$
-I=\int_a^{a+k\pi}|\sin x|,dx
+I=\int_a^{a+k\pi}|\sin x|dx
 $$
 
 * 起点是 **$a$**
@@ -297,7 +297,7 @@ That’s all — **nothing more complicated than that**.
 
 Because the absolute value does nothing on this interval:
 $$
-\int_0^\pi |\sin x|,dx = \int_0^\pi \sin x,dx
+\int_0^\pi |\sin x|dx = \int_0^\pi \sin x,dx
 $$
 
 We already know:
@@ -324,7 +324,7 @@ This tells us:
 
 That’s why:
 $$
-\int_t^{t+\pi}|\sin x|,dx = 2 \quad \text{(no matter where you start)}
+\int_t^{t+\pi}|\sin x|dx = 2 \quad \text{(no matter where you start)}
 $$
 
 ---
@@ -455,7 +455,7 @@ $$
 
 > 当 $k<0$ 时，积分区间方向反了，
 > 利用定积分性质
-> $\displaystyle \int_b^a f(x),dx=-\int_a^b f(x),dx$，
+> $\displaystyle \int_b^a f(x)dx=-\int_a^b f(x)dx$，
 > 因此“上下限对调并变号”。
 
 
@@ -465,7 +465,7 @@ $$
 题目给的是
 
 $$
-\int_{x=\pi/6}^{\pi/2}!dx\int_{y=\sin x}^{1} f(x,y),dy
+\int_{x=\pi/6}^{\pi/2}dx\int_{y=\sin x}^{1} f(x,y),dy
 $$
 
 这表示的积分区域 (D) 是：
