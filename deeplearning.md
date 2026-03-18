@@ -348,17 +348,17 @@ Let’s go step by step and make it crystal clear.
 
 The formal definition of discrete 2D convolution is:
 
-[
+$$
 y[n,m] =
 \sum_{k_1,k_2}
 w[k_1,k_2] ; x[n - k_1, m - k_2]
-]
+$$
 
 Notice carefully:
 
-[
+$$
 x[n - k_1, m - k_2]
-]
+$$
 
 That minus sign is the key.
 
@@ -372,24 +372,24 @@ It means:
 
 If the kernel is:
 
-[
+$$
 w =
 \begin{bmatrix}
-a & b & c \
-d & e & f \
+a & b & c \\
+d & e & f \\
 g & h & i
 \end{bmatrix}
-]
+$$
 
 True convolution uses:
 
-[
+$$
 \begin{bmatrix}
-i & h & g \
-f & e & d \
+i & h & g \\
+f & e & d \\
 c & b & a
 \end{bmatrix}
-]
+$$
 
 It is flipped:
 
@@ -404,17 +404,17 @@ That happens because of the minus index.
 
 In deep learning libraries (PyTorch, TensorFlow), the operation implemented is:
 
-[
+$$
 y[n,m] =
 \sum_{k_1,k_2}
-w[k_1,k_2] ; x[n + k_1, m + k_2]
-]
+w[k_1,k_2]  x[n + k_1, m + k_2]
+$$
 
 Notice:
 
-[
+$$
 x[n + k_1]
-]
+$$
 
 No minus sign.
 
@@ -455,23 +455,23 @@ Suppose:
 
 Signal:
 
-[
+$$
 x = [x_0, x_1, x_2]
-]
+$$
 
 Kernel:
 
-[
+$$
 w = [a, b]
-]
+$$
 
 ---
 
 ### True convolution:
 
-[
+$$
 y[n] = a x[n] + b x[n-1]
-]
+$$
 
 (because of flipping)
 
@@ -479,9 +479,9 @@ y[n] = a x[n] + b x[n-1]
 
 ### Cross-correlation:
 
-[
+$$
 y[n] = a x[n] + b x[n+1]
-]
+$$
 
 No flip.
 
@@ -559,9 +559,9 @@ We’ll do **1D**, because it’s easiest to follow.
 
 ### Input signal
 
-[
-x = [,1,; 2,; 3,; 4,]
-]
+$$
+x = [1, 2, 3, 4]
+$$
 
 Indexing:
 
@@ -574,9 +574,9 @@ Indexing:
 
 ### Kernel
 
-[
-w = [,a,; b,] = [,10,; 100,]
-]
+$$
+w = [a, b] = [10, 100]
+$$
 
 So:
 
@@ -588,9 +588,9 @@ So:
 ## 1️⃣ Cross-correlation (what CNNs actually do)
 
 Formula:
-[
+$$
 y[n] = a \cdot x[n] + b \cdot x[n+1]
-]
+$$
 
 Let’s compute values.
 
@@ -798,26 +798,26 @@ We’ll use very small numbers so everything is transparent.
 
 # 🟦 Step 1: Input Image (3×3)
 
-[
+$$
 X =
 \begin{bmatrix}
-1 & 2 & 3 \
-4 & 5 & 6 \
+1 & 2 & 3 \\
+4 & 5 & 6 \\
 7 & 8 & 9
 \end{bmatrix}
-]
+$$
 
 ---
 
 # 🟦 Step 2: Kernel (2×2)
 
-[
+$$
 W =
 \begin{bmatrix}
-1 & 2 \
+1 & 2 \\
 3 & 4
 \end{bmatrix}
-]
+$$
 
 ---
 
@@ -829,9 +829,9 @@ We will compute the output at the **top-left position** only (no padding, stride
 
 Formula:
 
-[
-y[n,m] = \sum w[k_1,k_2] ; x[n+k_1, m+k_2]
-]
+$$
+y[n,m] = \sum w[k_1,k_2]  x[n+k_1, m+k_2]
+$$
 
 No flipping.
 
@@ -839,12 +839,12 @@ No flipping.
 
 ### Overlay kernel at top-left
 
-[
+$$
 \begin{bmatrix}
-\color{red}{1} & \color{red}{2} \
+\color{red}{1} & \color{red}{2} \\
 \color{red}{4} & \color{red}{5}
 \end{bmatrix}
-]
+$$
 
 Now multiply elementwise:
 
@@ -902,12 +902,12 @@ W_{flipped} =
 
 Now overlay this flipped kernel on the same region:
 
-[
+$$
 \begin{bmatrix}
-\color{red}{1} & \color{red}{2} \
+\color{red}{1} & \color{red}{2} \\
 \color{red}{4} & \color{red}{5}
 \end{bmatrix}
-]
+$$
 
 Multiply:
 
